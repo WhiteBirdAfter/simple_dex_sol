@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "bindings",
+    "e2e-tests"
+]
+resolver = "2"

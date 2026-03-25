@@ -1,0 +1,12 @@
+# Foundry
+contracts/cache/
+contracts/out/
+contracts/broadcast/
+
+# Rust
+target/
+
+# Misc
+.env
+.DS_Store
+.idea/
