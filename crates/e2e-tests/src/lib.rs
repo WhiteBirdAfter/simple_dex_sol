@@ -6,6 +6,10 @@ use eyre::Result;
 use alloy::network::EthereumWallet;
 use alloy::signers::local::PrivateKeySigner;
 
+#[cfg(test)]
+mod factory;
+
+
 sol!(
     #[allow(missing_docs)]
     #[sol(rpc)]
