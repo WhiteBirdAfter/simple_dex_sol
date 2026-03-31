@@ -8,7 +8,7 @@ use alloy::signers::local::PrivateKeySigner;
 
 #[cfg(test)]
 mod factory;
-
+mod router;
 
 sol!(
     #[allow(missing_docs)]
