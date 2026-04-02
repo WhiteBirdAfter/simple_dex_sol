@@ -66,7 +66,12 @@ contract Router{
         uint256 amountBDesired,
         uint256 amountAMin,
         uint256 amountBMin
-    ) internal view returns (uint256 amountA, uint256 amountB) {
+    ) internal returns (uint256 amountA, uint256 amountB) {
+        
+        if (Factory(factory).getPair(tokenA, tokenB) == address(0)) {
+            Factory(factory).createPair(tokenA, tokenB);
+        }
+
         (uint256 reserveA, uint256 reserveB) = _getReserves(tokenA, tokenB);
 
         if (reserveA == 0 && reserveB == 0) {
@@ -101,11 +106,13 @@ contract Router{
         if (block.timestamp > deadline) revert Expired();
         require(to != address(0), "ROUTER: ZERO_TO");
 
-        address pair = _getPair(tokenA, tokenB);
+        
 
         (amountA, amountB) = _addLiquidity(
             tokenA, tokenB, amountADesired, amountBDesired, amountAMin, amountBMin
         );
+
+        address pair = _getPair(tokenA, tokenB);
 
         IERC20(tokenA).safeTransferFrom(msg.sender, pair, amountA);
         IERC20(tokenB).safeTransferFrom(msg.sender, pair, amountB);
